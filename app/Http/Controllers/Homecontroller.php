@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\storePostRequest;
 
 class Homecontroller extends Controller
@@ -16,7 +17,7 @@ class Homecontroller extends Controller
      */
     public function index()
     {
-        $data = Post::orderBy('id', 'desc')->get();
+        $data = Post::where('user_id', auth()->id())->orderBy('id', 'desc')->get();
         return view('home', compact('data'));
     }
 
@@ -40,7 +41,8 @@ class Homecontroller extends Controller
     public function store(storePostRequest $request)
     {
         $validated = $request->validated();
-        Post::create($validated);
+        $post = Post::create($validated + ['user_id'=>Auth::user()->id]);
+
         return redirect('/posts');
     }
 
@@ -52,6 +54,7 @@ class Homecontroller extends Controller
      */
     public function show(Post $post)
     {
+        $this->authorize('view', $post);
         return view('show', compact('post'));
     }
 
@@ -63,6 +66,7 @@ class Homecontroller extends Controller
      */
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
         $categories = Category::all();
         return view('edit', compact('post', 'categories'));
     }

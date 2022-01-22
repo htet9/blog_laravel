@@ -4,6 +4,7 @@
     <div class="container">
         <div>
             <a href="/posts/create" class="btn btn-success">Create</a>
+            <h5 style="float:right">{{ Auth::user()->name }}</h5>
         </div><br>
         <div class="card border-dark mb-3" style="max-width: 100rem;">
             <div class="card-header" style="text-align:center">
@@ -25,6 +26,7 @@
                         </div>
                     </div><hr>
                 @endforeach
+                <a href="/logout" style="float:right" class="btn btn-danger">Logout</a>
             </div>
         </div>
     </div>

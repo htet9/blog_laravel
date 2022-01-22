@@ -9,7 +9,7 @@
 
     <div class="container">
         <div>
-            <a href="/posts" class="btn btn-dark">Back</a>
+            <a href="/posts" class="btn btn-secondary">Back</a>
         </div><br>
         <div class="card border-dark mb-3" style="max-width: 100rem;">
             <div class="card-header" style="text-align:center">
