@@ -6,6 +6,12 @@
             <a href="/posts/create" class="btn btn-success">Create</a>
             <h5 style="float:right">{{ Auth::user()->name }}</h5>
         </div><br>
+        @if (session('status'))
+            <div class="alert alert-success alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Success!</strong> {{ session('status') }}
+            </div>
+        @endif
         <div class="card border-dark mb-3" style="max-width: 100rem;">
             <div class="card-header" style="text-align:center">
                 Contents

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Mail\PostStored;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\storePostRequest;
 
 class Homecontroller extends Controller
@@ -42,8 +44,7 @@ class Homecontroller extends Controller
     {
         $validated = $request->validated();
         $post = Post::create($validated + ['user_id'=>Auth::user()->id]);
-
-        return redirect('/posts');
+        return redirect('/posts')->with('status', config('mail.message.create'));
     }
 
     /**
@@ -83,7 +84,8 @@ class Homecontroller extends Controller
     {
         $validated = $request->validated();
         $post->update($validated);
-        return redirect('/posts');
+
+        return redirect('/posts')->with('status', config('mail.message.update'));
     }
 
     /**

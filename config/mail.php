@@ -33,6 +33,11 @@ return [
     |
     */
 
+    'message' => [
+        'create' => 'Post created successfully!',
+        'update' => 'Post updated successfully!',
+    ],
+
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
